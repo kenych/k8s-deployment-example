@@ -1,0 +1,15 @@
+# newer version is only v1 but this is for v1.18.0
+# kubectl api-versions | grep -i policy
+# policy/v1beta1
+
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "challengeapp.fullname" . }}
+  labels:
+    {{- include "challengeapp.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.availability.evictionStrategy.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "challengeapp.selectorLabels" . | nindent 6 }}

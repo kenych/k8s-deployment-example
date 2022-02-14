@@ -2,7 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+
+availability:
+  replicas: 5
+  rollingUpdateStrategy:
+    maxUnavailable: 1
+  evictionStrategy:
+    minAvailable: 2
 
 image:
   repository: nginx
