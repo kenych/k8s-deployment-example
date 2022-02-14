@@ -1,0 +1,15 @@
+{{- if .Values.serviceAccount.create -}}
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: {{ include "challengeapp.fullname" . }}
+  labels:
+    {{- include "challengeapp.labels" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "challengeapp.fullname" . }}
+roleRef:
+  kind: Role
+  name: {{ include "challengeapp.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
